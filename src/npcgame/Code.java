@@ -88,10 +88,8 @@ public class Code {
         }
         
         public Property call(Context con, String name) {
-            switch (name) {
-                case "random":
-                    return new Property(Math.random());
-            }
+            Property ret = BuiltinFuncs.call(name, con);
+            if (ret != null) return ret;
             
             return con.av.execScript(name);
         }
@@ -161,7 +159,7 @@ public class Code {
         }
     }
     
-    static class Context {
+    public static class Context {
         Avatar av;
         List<Property> stack = new ArrayList<Property>();
         
